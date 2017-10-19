@@ -5,7 +5,7 @@ import plotly.plotly as py
 
 sparkSession = SparkSession.builder.master("local[*]") \
 .config("spark.driver.extraClassPath","postgresql-42.1.4.jar") \
-.config("spark.jars", "postgresql-42.1.4.jar")
+.config("spark.jars", "postgresql-42.1.4.jar") \
 .getOrCreate()
 
 sparkSession.sparkContext.addFile("postgresql-42.1.4.jar")
