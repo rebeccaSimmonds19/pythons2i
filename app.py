@@ -10,8 +10,6 @@ sparkSession = SparkSession.builder.master("local[*]") \
 
 sparkSession.sparkContext.addFile("postgresql-42.1.4.jar")
 
-spark
-
 import psycopg2
 conn = psycopg2.connect("host='172.17.0.3' port='5432' dbname='wineDb' user='username' password='password'")
 cur = conn.cursor()
