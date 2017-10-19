@@ -4,7 +4,6 @@ from pyspark.sql.functions import mean, desc
 import plotly.plotly as py
 
 sparkSession = SparkSession.builder.master("local[*]") \
-._jsc.addJar("spark.driver.extraClassPath","postgresql-42.1.4.jar") \
 .getOrCreate()
 
 #sparkSession.sparkContext.addJar("postgresql-42.1.4.jar")
