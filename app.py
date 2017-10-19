@@ -9,7 +9,7 @@ sparkSession = SparkSession.builder.master("local[*]") \
 
 #sparkSession.sparkContext.addJar("postgresql-42.1.4.jar")
 
-._jsc.addJar("postgresql-42.1.4.jar") \
+#._jsc.addJar("postgresql-42.1.4.jar") \
 #.config("spark.driver.extraClassPath","postgresql-42.1.4.jar") \
 #.config("spark.jars", "postgresql-42.1.4.jar") \
 #sparkSession.sparkContext.addFile("postgresql-42.1.4.jar")
