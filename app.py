@@ -4,13 +4,13 @@ from pyspark.sql.functions import mean, desc
 import plotly.plotly as py
 
 sparkSession = SparkSession.builder.master("local[*]") \
-#.config("spark.driver.extraClassPath","postgresql-42.1.4.jar") \
-#.config("spark.jars", "postgresql-42.1.4.jar") \
 .getOrCreate()
 
+#.config("spark.driver.extraClassPath","postgresql-42.1.4.jar") \
+#.config("spark.jars", "postgresql-42.1.4.jar") \
 #sparkSession.sparkContext.addFile("postgresql-42.1.4.jar")
 
-sparksession._jsc.addJar("postgresql-42.1.4.jar")
+sparkSession._jsc.addJar("postgresql-42.1.4.jar")
 
 import psycopg2
 conn = psycopg2.connect("host='172.17.0.3' port='5432' dbname='wineDb' user='username' password='password'")
