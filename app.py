@@ -4,7 +4,7 @@ from pyspark.sql.functions import mean, desc
 import plotly.plotly as py
 
 sparkSession = SparkSession.builder.master("local[*]") \
-.config("spark.driver.extraClassPath","/opt/postgresql-42.1.4.jar") \
+.config("spark.driver.extraClassPath","/postgresql-42.1.4.jar") \
 .getOrCreate()
 
 import psycopg2
