@@ -4,6 +4,7 @@ from pyspark.sql.functions import mean, desc
 import plotly.plotly as py
 
 sparkSession = SparkSession.builder.master("local[*]") \
+.config("spark.driver.extraClassPath","opt/app-root/src/postgresql-42.1.4.jar") /
 .getOrCreate()
 
 #sparkSession.sparkContext.addJar("postgresql-42.1.4.jar")
@@ -17,7 +18,7 @@ import psycopg2
 conn = psycopg2.connect("host='172.17.0.3' port='5432' dbname='wineDb' user='username' password='password'")
 cur = conn.cursor()
 #make table
-f = open(r'wineData.csv', 'r')
+f = open(r'/opt/app-root/src/wineData.csv', 'r')
 cur.copy_from(f, "wine_reviews", sep=',')
 conn.commit()
 f.close()
