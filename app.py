@@ -18,7 +18,7 @@ def index(choromap):
     plot_url = plot(choromap)
     print(plot_url)
     #resp = make_response(render_template(plot_url))
-    return plot_url
+    return "hello"
 
 import psycopg2
 conn = psycopg2.connect("host='172.17.0.3' port='5432' dbname='wineDb' user='username' password='password'")
