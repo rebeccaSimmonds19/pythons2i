@@ -3,7 +3,7 @@ from pyspark.sql import SparkSession, SQLContext
 from pyspark.sql.functions import mean, desc
 import plotly.plotly as py
 from plotly.offline import download_plotlyjs, init_notebook_mode, plot,iplot
-init_notebook_mode(connected=True)
+init_notebook_mode(connected=False)
 
 sparkSession = SparkSession.builder.master("local[*]") \
 .getOrCreate()
