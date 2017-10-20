@@ -14,11 +14,11 @@ app = Flask(__name__)
 
 
 @app.route('/')                                            
-def index(choromap):                                       
-    #resp = make_response(render_template(plot(choromap) ))
+def index(choromap):
     plot_url = plot(choromap)
     print(plot_url)
-    return resp                                            
+    resp = make_response(render_template(plot_url))
+    return resp
 
 import psycopg2
 conn = psycopg2.connect("host='172.17.0.3' port='5432' dbname='wineDb' user='username' password='password'")
