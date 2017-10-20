@@ -2,8 +2,8 @@ import pyspark
 from pyspark.sql import SparkSession, SQLContext
 from pyspark.sql.functions import mean, desc
 import plotly.plotly as py
-from plotly.offline import download_plotlyjs, plot,iplot
-plotly.offline.init_notebook_mode()
+from plotly.offline import download_plotlyjs, init_notebook_mode, plot,iplot
+init_notebook_mode(connected=True)
 
 sparkSession = SparkSession.builder.master("local[*]") \
 .getOrCreate()
