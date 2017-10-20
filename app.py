@@ -6,6 +6,9 @@ from plotly.graph_objs import *
 sparkSession = SparkSession.builder.master("local[*]") \
 .getOrCreate()
 
+app = Flask(__name__)
+
+
 @app.route('/')                                            
 def index(choromap):                                       
     resp = make_response(render_template(plot(choromap) )) 
@@ -46,7 +49,6 @@ choromap = dict(data=[data], layout=layout)
 index(choromap)
 from flask import app, make_response, render_template
 
-app = Flask(__name__)
 
 
 
