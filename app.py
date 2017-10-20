@@ -16,8 +16,8 @@ app = Flask(__name__)
 @app.route('/')                                            
 def index(choromap):                                       
     #resp = make_response(render_template(plot(choromap) ))
-    plot_url = plot(choromap
-    print plot_url
+    plot_url = plot(choromap)
+    print(plot_url)
     return resp                                            
 
 import psycopg2
