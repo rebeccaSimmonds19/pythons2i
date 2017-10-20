@@ -3,6 +3,8 @@ from pyspark.sql import SparkSession, SQLContext
 from pyspark.sql.functions import mean, desc
 from plotly.offline import download_plotlyjs, plot
 from plotly.graph_objs import *
+from flask import app, make_response, render_template
+
 sparkSession = SparkSession.builder.master("local[*]") \
 .getOrCreate()
 
@@ -47,7 +49,6 @@ data =  dict(type = 'choropleth',
 layout = dict(geo = {'scope':'world'})
 choromap = dict(data=[data], layout=layout)
 index(choromap)
-from flask import app, make_response, render_template
 
 
 
