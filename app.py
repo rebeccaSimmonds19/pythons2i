@@ -38,4 +38,12 @@ data =  dict(type = 'choropleth',
 )
 layout = dict(geo = {'scope':'world'})
 choromap = dict(data=[data], layout=layout)
-plot(choromap)
+index(choromap)
+from flask import app, make_response, render_template
+
+app = Flask(__name__)
+
+@app.route('/')
+def index(choromap):
+    resp = make_response(render_template(plot(choromap) ))
+    return resp
