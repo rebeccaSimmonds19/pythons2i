@@ -38,5 +38,5 @@ data =  dict(type = 'choropleth',
         colorbar = {'title': 'Average Rating'}
 )
 layout = dict(geo = {'scope':'world'})
-choromap = (data=data, layout=layout)
+choromap = (data=[data], layout=layout)
 iplot(choromap)
