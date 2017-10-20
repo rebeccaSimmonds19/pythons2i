@@ -4,15 +4,7 @@ from pyspark.sql.functions import mean, desc
 import plotly.plotly as py
 
 sparkSession = SparkSession.builder.master("local[*]") \
-.config("spark.driver.extraClassPath","postgresql-42.1.4.jar") \
 .getOrCreate()
-
-#sparkSession.sparkContext.addJar("postgresql-42.1.4.jar")
-
-#._jsc.addJar("postgresql-42.1.4.jar") \
-#.config("spark.driver.extraClassPath","postgresql-42.1.4.jar") \
-#.config("spark.jars", "postgresql-42.1.4.jar") \
-sparkSession.sparkContext.addFile("postgresql-42.1.4.jar")
 
 import psycopg2
 conn = psycopg2.connect("host='172.17.0.3' port='5432' dbname='wineDb' user='username' password='password'")
@@ -48,4 +40,4 @@ data =  dict(type = 'choropleth',
 )
 layout = dict(geo = {'scope':'world'})
 choromap = go.Figure(data = [data],layout = layout)
-py(choromap)
+py.iplot(choromap)
