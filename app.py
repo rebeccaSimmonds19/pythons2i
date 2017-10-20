@@ -1,8 +1,9 @@
 import pyspark
 from pyspark.sql import SparkSession, SQLContext
 from pyspark.sql.functions import mean, desc
-import plotly.plotly as py
-
+from plotly.offline import download_plotlyjs, init_notebook_mode, iplot
+from plotly.graph_objs import *
+init_notebook_mode()
 sparkSession = SparkSession.builder.master("local[*]") \
 .getOrCreate()
 
@@ -14,8 +15,6 @@ f = open(r'/opt/app-root/src/wineData.csv', 'r')
 cur.copy_from(f, "wine_reviews", sep=',')
 conn.commit()
 f.close()
-
-import plotly.graph_objs as go
 
 url = "jdbc:postgresql://172.17.0.3/wineDb?user=username&password=password"
 df = (sparkSession.read.format("jdbc")
@@ -39,5 +38,5 @@ data =  dict(type = 'choropleth',
         colorbar = {'title': 'Average Rating'}
 )
 layout = dict(geo = {'scope':'world'})
-choromap = go.Figure(data = [data],layout = layout)
-py.iplot(choromap)
+choromap = (data=data, layout=layout)
+iplot(choromap)
