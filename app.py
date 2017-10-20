@@ -42,4 +42,4 @@ data =  dict(type = 'choropleth',
 )
 layout = dict(geo = {'scope':'world'})
 choromap = go.Figure(data = [data],layout = layout)
-     iplot(choromap)
+iplot(choromap)
