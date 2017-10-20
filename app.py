@@ -6,6 +6,11 @@ from plotly.graph_objs import *
 sparkSession = SparkSession.builder.master("local[*]") \
 .getOrCreate()
 
+@app.route('/')                                            
+def index(choromap):                                       
+    resp = make_response(render_template(plot(choromap) )) 
+    return resp                                            
+
 import psycopg2
 conn = psycopg2.connect("host='172.17.0.3' port='5432' dbname='wineDb' user='username' password='password'")
 cur = conn.cursor()
@@ -43,7 +48,6 @@ from flask import app, make_response, render_template
 
 app = Flask(__name__)
 
-@app.route('/')
-def index(choromap):
-    resp = make_response(render_template(plot(choromap) ))
-    return resp
+
+
+
