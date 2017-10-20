@@ -1,7 +1,7 @@
 import pyspark
 from pyspark.sql import SparkSession, SQLContext
 from pyspark.sql.functions import mean, desc
-from plotly.offline import download_plotlyjs, init_notebook_mode, iplot
+from plotly.offline import download_plotlyjs, init_notebook_mode, plot
 from plotly.graph_objs import *
 init_notebook_mode()
 sparkSession = SparkSession.builder.master("local[*]") \
@@ -39,4 +39,4 @@ data =  dict(type = 'choropleth',
 )
 layout = dict(geo = {'scope':'world'})
 choromap = dict(data=data, layout=layout)
-iplot(choromap)
+plot(choromap)
