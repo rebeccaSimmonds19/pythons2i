@@ -19,7 +19,8 @@ app = Flask(__name__)
 def index(choromap):
     plot_url = plot(choromap)
     print(plot_url)
-    resp = render_template('opt/app-root/src/temp-plot.html')
+    os.rename(plot_url, "template/temp-plot.html")
+    resp = render_template('temp-plot.html')
     return resp
 
 import psycopg2
