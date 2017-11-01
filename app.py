@@ -17,7 +17,7 @@ app = Flask(__name__)
 
 @app.route('/')                                            
 def index(choromap):
-    plot_url = plot(choromap)
+    plot_url = plot(choromap, filename='map')
     print(plot_url)
     os.rename('/opt/app-root/src/temp-plot.html', 'template/temp-plot.html')
     resp = render_template('temp-plot.html')
