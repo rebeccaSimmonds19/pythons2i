@@ -15,7 +15,7 @@ sparkSession = SparkSession.builder.master("local[*]") \
 app = Flask(__name__)
 
 
-@app.route('/')                                            
+@app.route('/map')                                            
 def index(choromap):
     plot_url = plot(choromap, filename='map.html')
     print(plot_url)
