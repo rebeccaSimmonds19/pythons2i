@@ -58,7 +58,5 @@ choromap = dict(data=[data], layout=layout)
 index(choromap)
 
 
-if __name__ == "__main__":
-    app.run()
-
-
+if __name__ == '__main__':
+    app.run(host='0.0.0.0')
