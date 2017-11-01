@@ -3,25 +3,18 @@ from pyspark.sql import SparkSession, SQLContext
 from pyspark.sql.functions import mean, desc
 from plotly.offline import download_plotlyjs, plot
 from plotly.graph_objs import *
-from flask import Flask
-from flask import request
-from flask import app, make_response, render_template
-import os
+
+import pyspark
+from pyspark.sql import SparkSession, SQLContext
+from pyspark.sql.functions import mean, desc
+from plotly.offline import download_plotlyjs, plot
+from plotly.graph_objs import *
+import webbrowser, os.path
 
 
 sparkSession = SparkSession.builder.master("local[*]") \
 .getOrCreate()
 
-app = Flask(__name__)
-
-
-@app.route('/')                                            
-def index(choromap):
-    plot_url = plot(choromap, filename='map.html')
-    print(plot_url)
-    os.rename('/opt/app-root/src/map.html', 'templates/frontend/src/map.html')
-    resp = render_template("map.html", title = 'Projects')
-    return resp
 
 import psycopg2
 conn = psycopg2.connect("host='172.17.0.3' port='5432' dbname='wineDb' user='username' password='password'")
@@ -55,11 +48,6 @@ data =  dict(type = 'choropleth',
 )
 layout = dict(geo = {'scope':'world'})
 choromap = dict(data=[data], layout=layout)
-index(choromap)
-
-
-if __name__ == "__main__":
-    port = int(os.environ.get("PORT", 8080))
-    app.run(host='0.0.0.0', port=port)
-
+path = plot(choromap)
+webbrowser.open(path)
 
