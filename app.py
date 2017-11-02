@@ -16,7 +16,10 @@ app = Flask(__name__)
 
 
 @app.route('/map')                                            
-def index(choromap):
+def index():
+    return "Hello"
+
+def map(choromap):
     #get the html file path
     plot_url = plot(choromap, filename='map.html')
     print(plot_url)
