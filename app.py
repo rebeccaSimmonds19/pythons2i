@@ -20,8 +20,8 @@ def index(choromap):
     plot_url = plot(choromap, filename='map.html')
     print(plot_url)
    # os.rename('/opt/app-root/src/map.html', 'templates/frontend/src/map.html')
-   # resp = render_template("map.html", title = 'Projects')
-    return plot_url
+    resp = render_template("map.html", title = 'Maps')
+    return resp
 
 import psycopg2
 conn = psycopg2.connect("host='172.17.0.3' port='5432' dbname='wineDb' user='username' password='password'")
