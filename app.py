@@ -26,7 +26,7 @@ def index(choromap):
         #os.chmod("/opt/root", 0o777)
         os.makedirs(newpath)
     #move the file to the templates dir
-    os.rename('opt/root-app/src/map.html', 'templates/map.html')
+    os.rename('opt/root-app/src/map.html', 'opt/root-app/src/templates/map.html')
     resp = render_template("map.html", title = 'Maps')
     return resp
 
