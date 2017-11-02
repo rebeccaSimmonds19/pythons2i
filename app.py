@@ -17,9 +17,15 @@ app = Flask(__name__)
 
 @app.route('/map')                                            
 def index(choromap):
+    #get the html file path
     plot_url = plot(choromap, filename='map.html')
     print(plot_url)
-    os.rename(plot_url, 'file://'+'templates/map.html')
+    #make the templates dir
+    newpath = r'/templates' 
+    if not os.path.exists(newpath):
+    os.makedirs(newpath)
+    #move the file to the templates dir
+    os.rename('opt/root-app/src/map.html, 'templates/map.html')
     resp = render_template("map.html", title = 'Maps')
     return resp
 
