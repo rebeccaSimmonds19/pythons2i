@@ -24,7 +24,7 @@ def index(choromap):
     return plot_url
 
 import psycopg2
-conn = psycopg2.connect("host='172.17.0.4' port='5432' dbname='wineDb' user='username' password='password'")
+conn = psycopg2.connect("host='172.17.0.3' port='5432' dbname='wineDb' user='username' password='password'")
 cur = conn.cursor()
 #make table
 f = open(r'/opt/app-root/src/wineData.csv', 'r')
@@ -34,7 +34,7 @@ cur.execute('create table wine_reviews(country VARCHAR, designation VARCHAR, poi
 conn.commit()
 f.close()
 
-url = "jdbc:postgresql://172.17.0.4/wineDb?user=username&password=password"
+url = "jdbc:postgresql://172.17.0.3/wineDb?user=username&password=password"
 df = (sparkSession.read.format("jdbc")
     .options(url=url, dbtable="wine_reviews")
     .load())
