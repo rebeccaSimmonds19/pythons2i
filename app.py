@@ -21,9 +21,9 @@ def index(choromap):
     plot_url = plot(choromap, filename='map.html')
     print(plot_url)
     #make the templates dir
-    newpath = r'/templates' 
+    newpath = r'opt/root-app/src/templates' 
     if not os.path.exists(newpath):
-        os.chmod(newpath, 0o777)
+        #os.chmod("/opt/root", 0o777)
         os.makedirs(newpath)
     #move the file to the templates dir
     os.rename('opt/root-app/src/map.html', 'templates/map.html')
