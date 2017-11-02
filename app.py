@@ -15,10 +15,10 @@ sparkSession = SparkSession.builder.master("local[*]") \
 app = Flask(__name__)
 
 
-@app.route('/map')                                            
+@app.route('/')                                            
 def index():
     return "Hello"
-
+@app.route('/map')
 def map(choromap):
     #get the html file path
     plot_url = plot(choromap, filename='map.html')
@@ -67,7 +67,7 @@ data =  dict(type = 'choropleth',
 )
 layout = dict(geo = {'scope':'world'})
 choromap = dict(data=[data], layout=layout)
-index(choromap)
+map(choromap)
 
 
 if __name__ == '__main__':
