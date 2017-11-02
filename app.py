@@ -52,7 +52,7 @@ def index():
     )
     layout = dict(geo = {'scope':'world'})
     choromap = dict(data=[data], layout=layout)
-    reutrn map(choromap)
+    return map(choromap)
 
 
 
