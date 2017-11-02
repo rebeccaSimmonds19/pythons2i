@@ -23,7 +23,7 @@ def index(choromap):
     #make the templates dir
     newpath = r'/opt/root-app/src/templates' 
     if not os.path.exists(newpath):
-        #os.chmod("/opt/root", 0o777)
+        os.chmod("/opt/root-app/src", 0o777)
         os.makedirs(newpath)
     #move the file to the templates dir
     os.rename('/opt/root-app/src/map.html', '/opt/root-app/src/templates/map.html')
