@@ -23,7 +23,7 @@ def index(choromap):
     #make the templates dir
     newpath = r'/templates' 
     if not os.path.exists(newpath):
-    os.makedirs(newpath)
+        os.makedirs(newpath)
     #move the file to the templates dir
     os.rename('opt/root-app/src/map.html, 'templates/map.html')
     resp = render_template("map.html", title = 'Maps')
