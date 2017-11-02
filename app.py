@@ -30,8 +30,8 @@ cur = conn.cursor()
 f = open(r'/opt/app-root/src/wineData.csv', 'r')
 cur.copy_from(f, "wine_reviews", sep=',')
 conn.commit()
-cur.execute('create table wine_reviews(country VARCHAR, designation VARCHAR, points INT, price VARCHAR, province VARCHAR, region_1 VARCHAR, region_2 VARCHAR, variety VARCHAR, winery VARCHAR);')
-conn.commit()
+#cur.execute('create table wine_reviews(country VARCHAR, designation VARCHAR, points INT, price VARCHAR, province VARCHAR, region_1 VARCHAR, region_2 VARCHAR, variety VARCHAR, winery VARCHAR);')
+#conn.commit()
 f.close()
 
 url = "jdbc:postgresql://172.17.0.3/wineDb?user=username&password=password"
