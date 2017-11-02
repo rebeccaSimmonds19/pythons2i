@@ -33,7 +33,7 @@ def index():
     df = (sparkSession.read.format("jdbc")
         .options(url=url, dbtable="wine_reviews")
         .load())
-
+    print('loaded datatframe'))
     table = df.select('country','points').groupBy('country').agg(mean('points')).orderBy('avg(points)',ascending=False)
     countryCols = table.select('country').collect()
     countries = list()
@@ -43,6 +43,7 @@ def index():
     points = list()
     for point in pointCols:
         points.append(point[0])
+    print('made all lists')
     data =  dict(type = 'choropleth',
             locationmode='country names',
             locations = countries,
@@ -50,8 +51,10 @@ def index():
             z = points,
             colorbar = {'title': 'Average Rating'}
     )
+    print('made dict')
     layout = dict(geo = {'scope':'world'})
     choromap = dict(data=[data], layout=layout)
+    print('going to return the map')
     return map(choromap)
 
 
