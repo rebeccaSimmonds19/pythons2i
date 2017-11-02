@@ -17,7 +17,8 @@ app = Flask(__name__)
 
 @app.route('/')                                            
 def index():
-    mport psycopg2
+    print('in index')
+    import psycopg2
     conn = psycopg2.connect("host='172.17.0.3' port='5432' dbname='wineDb' user='username' password='password'")
     cur = conn.cursor()
     #make table
@@ -71,5 +72,6 @@ def map(choromap):
     return resp
 
 if __name__ == '__main__':
+    print('in main')
     port = int(os.environ.get("PORT", 8080))
     app.run(host='0.0.0.0', port=port)
