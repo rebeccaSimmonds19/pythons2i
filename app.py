@@ -17,7 +17,6 @@ app = Flask(__name__)
 
 @app.route('/')                                            
 def index():
-    print('in index')
     import psycopg2
     conn = psycopg2.connect("host='172.17.0.3' port='5432' dbname='wineDb' user='username' password='password'")
     cur = conn.cursor()
@@ -33,7 +32,6 @@ def index():
     df = (sparkSession.read.format("jdbc")
         .options(url=url, dbtable="wine_reviews")
         .load())
-    print('loaded datatframe')
     table = df.select('country','points').groupBy('country').agg(mean('points')).orderBy('avg(points)',ascending=False)
     countryCols = table.select('country').collect()
     countries = list()
@@ -43,7 +41,6 @@ def index():
     points = list()
     for point in pointCols:
         points.append(point[0])
-    print('made all lists')
     data =  dict(type = 'choropleth',
             locationmode='country names',
             locations = countries,
@@ -51,19 +48,13 @@ def index():
             z = points,
             colorbar = {'title': 'Average Rating'}
     )
-    print('made dict')
     layout = dict(geo = {'scope':'world'})
     choromap = dict(data=[data], layout=layout)
-    print('going to return the map')
     return map(choromap)
-
-
-
 
 def map(choromap):
     #get the html file path
     plot_url = plot(choromap, filename='map.html')
-    print(plot_url)
     #make the templates dir
     newpath = r'/opt/app-root/src/templates' 
     if not os.path.exists(newpath):
@@ -75,6 +66,5 @@ def map(choromap):
     return resp
 
 if __name__ == '__main__':
-    print('in main')
     port = int(os.environ.get("PORT", 8080))
     app.run(host='0.0.0.0', port=port)
