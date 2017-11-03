@@ -33,7 +33,7 @@ def index():
     df = (sparkSession.read.format("jdbc")
         .options(url=url, dbtable="wine_reviews")
         .load())
-    print('loaded datatframe'))
+    print('loaded datatframe')
     table = df.select('country','points').groupBy('country').agg(mean('points')).orderBy('avg(points)',ascending=False)
     countryCols = table.select('country').collect()
     countries = list()
