@@ -16,7 +16,7 @@ app = Flask(__name__)
 
 
 @app.route('/')                                            
-def index():
+def index(self):
     import psycopg2
     conn = psycopg2.connect("host=self.servers port='5432' dbname='wineDb' user='username' password='password'")
     cur = conn.cursor()
