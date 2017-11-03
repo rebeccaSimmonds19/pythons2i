@@ -9,7 +9,7 @@ from flask import app, make_response, render_template
 import os
 import psycopg2
 
-class MapApp:
+class MapApp():
     sparkSession = SparkSession.builder.master("local[*]") \
     .getOrCreate()
     obj = MapApp()
