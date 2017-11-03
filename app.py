@@ -18,7 +18,7 @@ app = Flask(__name__)
 @app.route('/')                                            
 def index():
     import psycopg2
-    conn = psycopg2.connect("host='172.17.0.3' port='5432' dbname='wineDb' user='username' password='password'")
+    conn = psycopg2.connect("host='self.servers port='5432' dbname='wineDb' user='username' password='password'")
     cur = conn.cursor()
     
    # does table exist
@@ -35,7 +35,7 @@ def index():
     conn.commit()
     f.close()
 
-    url = "jdbc:postgresql://172.17.0.3/wineDb?user=username&password=password"
+    url = "jdbc:postgresql://"+self.servers+"/wineDb?user=username&password=password"
     df = (sparkSession.read.format("jdbc")
         .options(url=url, dbtable="wine_reviews")
         .load())
