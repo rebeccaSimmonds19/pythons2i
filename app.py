@@ -15,7 +15,7 @@ class MapApp:
 
     app = Flask(__name__)
 
-    def __init__():
+    def __init__(self):
         host = self.servers
         conn = psycopg2.connect("host=host port='5432' dbname='wineDb' user='username' password='password'")
         cur = conn.cursor()
@@ -35,7 +35,7 @@ class MapApp:
         f.close()
 
     @app.route('/')                                            
-    def index(self):
+    def index():
         url = "jdbc:postgresql://"+MapApp.host+"/wineDb?user=username&password=password"
         df = (sparkSession.read.format("jdbc")
             .options(url=url, dbtable="wine_reviews")
