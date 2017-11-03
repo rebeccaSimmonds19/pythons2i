@@ -7,6 +7,7 @@ from flask import Flask
 from flask import request
 from flask import app, make_response, render_template
 import os
+import psycopg2
 
 
 sparkSession = SparkSession.builder.master("local[*]") \
@@ -14,9 +15,11 @@ sparkSession = SparkSession.builder.master("local[*]") \
 
 app = Flask(__name__)
 
+host
+
 def __init__(self):
-    import psycopg2
-    conn = psycopg2.connect("host=self.servers port='5432' dbname='wineDb' user='username' password='password'")
+    host = self.servers
+    conn = psycopg2.connect("host=host port='5432' dbname='wineDb' user='username' password='password'")
     cur = conn.cursor()
     
    # does table exist
@@ -35,7 +38,7 @@ def __init__(self):
 
 @app.route('/')                                            
 def index(self):
-    url = "jdbc:postgresql://"+self.servers+"/wineDb?user=username&password=password"
+    url = "jdbc:postgresql://"+host+"/wineDb?user=username&password=password"
     df = (sparkSession.read.format("jdbc")
         .options(url=url, dbtable="wine_reviews")
         .load())
