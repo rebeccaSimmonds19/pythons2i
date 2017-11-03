@@ -12,8 +12,8 @@ import psycopg2
 class MapApp:
     sparkSession = SparkSession.builder.master("local[*]") \
     .getOrCreate()
-obj = MapApp()
-app = Flask(__name__)
+    obj = MapApp()
+    app = Flask(__name__)
 
     def __init__():
         obj = MapApp()
