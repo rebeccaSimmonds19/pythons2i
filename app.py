@@ -22,7 +22,7 @@ def index():
     cur = conn.cursor()
     
    # does table exist
-    tb_exists = 'select exists(select relname from pg_class where relname=wine_reviews)'
+    tb_exists = "select exists(select relname from pg_class where relname='"+"wine_reviews")'"
     if not cur.execute(tb_exists).fetchone():
         #make table
         cur.execute('create table wine_reviews(country VARCHAR, designation VARCHAR, points INT, price VARCHAR, province VARCHAR, region_1 VARCHAR, region_2 VARCHAR, variety VARCHAR, winery VARCHAR);')
