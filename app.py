@@ -34,7 +34,7 @@ def __init__(self):
     f.close()
 
 @app.route('/')                                            
-def index():
+def index(self):
     url = "jdbc:postgresql://"+self.servers+"/wineDb?user=username&password=password"
     df = (sparkSession.read.format("jdbc")
         .options(url=url, dbtable="wine_reviews")
