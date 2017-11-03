@@ -13,7 +13,7 @@ class MapApp:
     sparkSession = SparkSession.builder.master("local[*]") \
     .getOrCreate()
 obj = MapApp()
-    app = Flask(__name__)
+app = Flask(__name__)
 
     def __init__():
         obj = MapApp()
