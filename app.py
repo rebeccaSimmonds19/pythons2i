@@ -9,72 +9,69 @@ from flask import app, make_response, render_template
 import os
 import psycopg2
 
+class MapApp:
+    sparkSession = SparkSession.builder.master("local[*]") \
+    .getOrCreate()
 
-sparkSession = SparkSession.builder.master("local[*]") \
-.getOrCreate()
+    app = Flask(__name__)
 
-app = Flask(__name__)
-
-host
-
-def __init__(self):
-    host = self.servers
-    conn = psycopg2.connect("host=host port='5432' dbname='wineDb' user='username' password='password'")
-    cur = conn.cursor()
+    def __init__(self):
+        host = self.servers
+        conn = psycopg2.connect("host=host port='5432' dbname='wineDb' user='username' password='password'")
+        cur = conn.cursor()
     
-   # does table exist
-    tb_exists = "select exists(select relname from pg_class where relname='"+"wine_reviews"+"')"
-    cur.execute(tb_exists)
-    execute = cur.fetchone()[0]
-    if not execute:
-        #make table
-        cur.execute('create table wine_reviews(country VARCHAR, designation VARCHAR, points INT, price VARCHAR, province VARCHAR, region_1 VARCHAR, region_2 VARCHAR, variety VARCHAR, winery VARCHAR);')
+        # does table exist
+        tb_exists = "select exists(select relname from pg_class where relname='"+"wine_reviews"+"')"
+        cur.execute(tb_exists)
+        execute = cur.fetchone()[0]
+        if not execute:
+            #make table
+            cur.execute('create table wine_reviews(country VARCHAR, designation VARCHAR, points INT, price VARCHAR, province VARCHAR, region_1 VARCHAR, region_2 VARCHAR, variety VARCHAR, winery VARCHAR);')
+            conn.commit()
+        #copy csv
+        f = open(r'/opt/app-root/src/wineData.csv', 'r')
+        cur.copy_from(f, "wine_reviews", sep=',')
         conn.commit()
-    #copy csv
-    f = open(r'/opt/app-root/src/wineData.csv', 'r')
-    cur.copy_from(f, "wine_reviews", sep=',')
-    conn.commit()
-    f.close()
+        f.close()
 
-@app.route('/')                                            
-def index(self):
-    url = "jdbc:postgresql://"+host+"/wineDb?user=username&password=password"
-    df = (sparkSession.read.format("jdbc")
-        .options(url=url, dbtable="wine_reviews")
-        .load())
-    table = df.select('country','points').groupBy('country').agg(mean('points')).orderBy('avg(points)',ascending=False)
-    countryCols = table.select('country').collect()
-    countries = list()
-    for country in countryCols:
-        countries.append(str(country[0]))
-    pointCols = table.select('avg(points)').collect()
-    points = list()
-    for point in pointCols:
-        points.append(point[0])
-    data =  dict(type = 'choropleth',
-            locationmode='country names',
-            locations = countries,
-            colorscale='Blues',
-            z = points,
-            colorbar = {'title': 'Average Rating'}
-    )
-    layout = dict(geo = {'scope':'world'})
-    choromap = dict(data=[data], layout=layout)
-    return map(choromap)
+    @app.route('/')                                            
+    def index(self):
+        url = "jdbc:postgresql://"+MapApp.host+"/wineDb?user=username&password=password"
+        df = (sparkSession.read.format("jdbc")
+            .options(url=url, dbtable="wine_reviews")
+            .load())
+        table = df.select('country','points').groupBy('country').agg(mean('points')).orderBy('avg(points)',ascending=False)
+        countryCols = table.select('country').collect()
+        countries = list()
+        for country in countryCols:
+            countries.append(str(country[0]))
+        pointCols = table.select('avg(points)').collect()
+        points = list()
+        for point in pointCols:
+         points.append(point[0])
+        data =  dict(type = 'choropleth',
+                locationmode='country names',
+                locations = countries,
+                colorscale='Blues',
+                z = points,
+                colorbar = {'title': 'Average Rating'}
+        )
+        layout = dict(geo = {'scope':'world'})
+        choromap = dict(data=[data], layout=layout)
+        return map(choromap)
 
-def map(choromap):
-    #get the html file path
-    plot_url = plot(choromap, filename='map.html')
-    #make the templates dir
-    newpath = r'/opt/app-root/src/templates' 
-    if not os.path.exists(newpath):
-        #os.chmod("/opt/app-root/src", 0o777)
-        os.makedirs(newpath, 0777)
-    #move the file to the templates dir
-    os.rename('/opt/app-root/src/map.html', '/opt/app-root/src/templates/map.html')
-    resp = render_template("map.html", title = 'Maps')
-    return resp
-
-if __name__ == '__main__':
-    port = int(os.environ.get("PORT", 8080))
-    app.run(host='0.0.0.0', port=port)
+    def map(choromap):
+        #get the html file path
+        plot_url = plot(choromap, filename='map.html')
+        #make the templates dir
+        newpath = r'/opt/app-root/src/templates' 
+        if not os.path.exists(newpath):
+            os.makedirs(newpath, 0777)
+        #move the file to the templates dir
+        os.rename('/opt/app-root/src/map.html', '/opt/app-root/src/templates/map.html')
+        resp = render_template("map.html", title = 'Maps')
+        return resp
+    
+    if __name__ == '__main__':
+        port = int(os.environ.get("PORT", 8080))
+        app.run(host='0.0.0.0', port=port)
