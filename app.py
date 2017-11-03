@@ -37,7 +37,7 @@ class MapApp:
     @app.route('/')                                            
     def index():
         obj = MapApp()
-        url = "jdbc:postgresql://"+MapApp.host+"/wineDb?user=username&password=password"
+        url = "jdbc:postgresql://"+obj.servers+"/wineDb?user=username&password=password"
         df = (sparkSession.read.format("jdbc")
             .options(url=url, dbtable="wine_reviews")
             .load())
