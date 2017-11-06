@@ -15,11 +15,11 @@ class MyClass:
     def __init__(self):
         parser = argparse.ArgumentParser(description='map')
         parser.add_argument('--servers', help='the postgreql ip address')
-        args = parser.parser_args()
+        args = parser.parse_args()
 
-        self.make(args.servers)
+        self.make(self,args.servers)
 
-    def make(servers):
+    def make(self, servers):
         sparkSession = SparkSession.builder.master("local[*]") \
             .getOrCreate()
         conn = psycopg2.connect("host="+servers+"port='5432' dbname='wineDb' user='username' password='password'")
@@ -39,7 +39,7 @@ class MyClass:
         cur.copy_from(f, "wine_reviews", sep=',')
         conn.commit()
         f.close()
-        url = "jdbc:postgresql://" + self.servers + "/wineDb?user=username&password=password"
+        url = "jdbc:postgresql://" + servers + "/wineDb?user=username&password=password"
         df = (sparkSession.read.format("jdbc")
               .options(url=url, dbtable="wine_reviews")
               .load())
