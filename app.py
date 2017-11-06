@@ -14,7 +14,7 @@ class MapApp():
     .getOrCreate()
     app = Flask(__name__)
 
-    def setUp():
+    def setUp(self):
         host = self.servers
         conn = psycopg2.connect("host=host port='5432' dbname='wineDb' user='username' password='password'")
         cur = conn.cursor()
