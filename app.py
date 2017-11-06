@@ -12,11 +12,17 @@ import argparse
 
 class MyClass:
 
-    def __init__(self, servers):
+    def __init__(self):
+        parser = argparse.ArgumentParser(description='map')
+        parser.add_argument('--servers', help='the postgreql ip address')
+        args = parser.parser_args()
+
+        self.make(args.servers)
+
+    def make(servers):
         sparkSession = SparkSession.builder.master("local[*]") \
             .getOrCreate()
-        host = self.servers
-        conn = psycopg2.connect("host="+host+"port='5432' dbname='wineDb' user='username' password='password'")
+        conn = psycopg2.connect("host="+servers+"port='5432' dbname='wineDb' user='username' password='password'")
         cur = conn.cursor()
 
         # does table exist
@@ -59,11 +65,8 @@ class MyClass:
         # get the html file path
         plot(choromap, filename='map.html')
 
-def setUp(self):
-    parser = argparse.ArgumentParser(description='map')
-    parser.add_argument('--servers', help='the postgreql ip address')
-    args = parser.parser_args()
-    obj = MyClass(self, args.servers)
+def setUp():
+    MyClass()
 
 app = Flask(__name__)
 
