@@ -14,7 +14,7 @@ class MapApp():
     .getOrCreate()
     app = Flask(__name__)
 
-    def __init__(self):
+    def setUp():
         host = self.servers
         conn = psycopg2.connect("host=host port='5432' dbname='wineDb' user='username' password='password'")
         cur = conn.cursor()
@@ -36,8 +36,8 @@ class MapApp():
 
     @app.route('/')                                            
     def index():
-        obj = MapApp()
-        table = getDf(obj.host)
+        setUp()
+        table = getDf()
         countryCols = table.select('country').collect()
         countries = list()
         for country in countryCols:
@@ -57,7 +57,7 @@ class MapApp():
         choromap = dict(data=[data], layout=layout)
         return map(choromap)
 
-    def getDf(self):
+    def getDf():
         url = "jdbc:postgresql://"+self.servers+"/wineDb?user=username&password=password"
         df = (sparkSession.read.format("jdbc")
             .options(url=url, dbtable="wine_reviews")
