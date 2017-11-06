@@ -36,7 +36,8 @@ class MapApp():
 
     @app.route('/')                                            
     def index():
-        table = getDf(self)
+        obj = MapApp()
+        table = getDf(obj.host)
         countryCols = table.select('country').collect()
         countries = list()
         for country in countryCols:
