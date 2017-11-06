@@ -17,7 +17,7 @@ class MyClass:
         parser.add_argument('--servers', help='the postgreql ip address')
         args = parser.parse_args()
 
-        self.make(self,args.servers)
+        self.make(args.servers)
 
     def make(self, servers):
         sparkSession = SparkSession.builder.master("local[*]") \
