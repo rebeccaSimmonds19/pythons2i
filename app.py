@@ -11,7 +11,7 @@ import psycopg2
 
 class MyClass:
 
-    def __init__(self):
+    def __init__(self, servers):
         sparkSession = SparkSession.builder.master("local[*]") \
             .getOrCreate()
         host = self.servers
