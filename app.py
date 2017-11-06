@@ -8,7 +8,7 @@ app = Flask(__name__)
 
 @app.route('/')
 def index():
-    obj = mm()
+    obj = mm.MyClass()
      # make the templates dir
     newpath = r'/opt/app-root/src/templates'
     if not os.path.exists(newpath):
