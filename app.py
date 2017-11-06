@@ -14,7 +14,7 @@ class MapApp():
     .getOrCreate()
     app = Flask(__name__)
 
-    def setUp(self):
+    def setUp():
         host = self.servers
         conn = psycopg2.connect("host=host port='5432' dbname='wineDb' user='username' password='password'")
         cur = conn.cursor()
@@ -36,7 +36,7 @@ class MapApp():
 
     @app.route('/')                                            
     def index():
-        setUp(self)
+        self.setUp()
         table = getDf(self)
         countryCols = table.select('country').collect()
         countries = list()
