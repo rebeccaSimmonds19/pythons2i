@@ -1,4 +1,3 @@
-
 from flask import Flask
 from flask import app, render_template
 import os
@@ -8,6 +7,8 @@ from pyspark.sql.functions import mean, desc
 from plotly.offline import download_plotlyjs, plot
 from plotly.graph_objs import *
 import psycopg2
+import argparse
+
 
 class MyClass:
 
@@ -58,11 +59,17 @@ class MyClass:
         # get the html file path
         plot(choromap, filename='map.html')
 
+def setUp(self):
+    parser = argparse.ArgumentParser(description='map')
+    parser.add_argument('--servers', help='the postgreql ip address')
+    args = parser.parser_args()
+    obj = MyClass(self, args.servers)
+
 app = Flask(__name__)
 
 @app.route('/')
 def index():
-    obj = MyClass()
+    setUp()
      # make the templates dir
     newpath = r'/opt/app-root/src/templates'
     if not os.path.exists(newpath):
