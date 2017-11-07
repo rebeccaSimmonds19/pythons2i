@@ -80,8 +80,8 @@ def index():
     os.chmod('/opt/app-root/src/map.html', 077)
     # move the file to the templates dir
     #os.rename('/opt/app-root/src/map.html', '/opt/app-root/src/templates/map.html')
-    os.system('mv /opt/app-root/src/map.html /opt/app-root/src/templates/map.html')
-    os.chmod('/opt/app-root/src/templates/map.html', 077)
+    os.system('mv /opt/app-root/src/map.html /opt/app-root/src/templates/')
+    #os.chmod('/opt/app-root/src/templates/map.html', 077)
 
     resp = render_template("map.html", title='Maps')
     return resp
