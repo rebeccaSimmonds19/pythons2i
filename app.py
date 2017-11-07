@@ -79,7 +79,9 @@ def index():
         os.makedirs(newpath, 077)
     os.chmod('/opt/app-root/src/map.html', 077)
     # move the file to the templates dir
-    os.rename('/opt/app-root/src/map.html', '/opt/app-root/src/templates/map.html')
+    #os.rename('/opt/app-root/src/map.html', '/opt/app-root/src/templates/map.html')
+    os.system('sudo mv /opt/app-root/src/map.html /opt/app-root/src/templates/map.html')
+
     resp = render_template("map.html", title='Maps')
     return resp
 
