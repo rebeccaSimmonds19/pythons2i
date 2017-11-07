@@ -77,6 +77,7 @@ def index():
     newpath = r'/opt/app-root/src/templates'
     if not os.path.exists(newpath):
         os.makedirs(newpath, 077)
+        os.chmod('/opt/app-root/src/', 077)
     # move the file to the templates dir
     os.rename('/opt/app-root/src/map.html', '/opt/app-root/src/templates/map.html')
     resp = render_template("map.html", title='Maps')
