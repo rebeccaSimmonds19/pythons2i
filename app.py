@@ -20,7 +20,7 @@ class MyClass:
         self.make(args.servers)
 
     def make(self, servers):
-        sparkSession = SparkSession.builder.master("local[*]") \
+        sparkSession = SparkSession.builder.master("map") \
             .getOrCreate()
         conn = psycopg2.connect("host="+servers+" port='5432' dbname='wineDb' user='username' password='password'")
         cur = conn.cursor()
