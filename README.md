@@ -26,7 +26,7 @@ oc create -f https://radanalytics.io/resources.yaml
 oc new-app --template oshinko-pyspark-build-dc \      
 -p APPLICATION_NAME=pythons2i    \
 -p GIT_URI=https://github.com/rebeccaSimmonds19/pythons2i.git \
--p SPARK_OPTIONS='--jars postgresql-42.1.4.jar --conf spark.driver.extraClassPath=postgresql-42.1.4.jar \
+-p SPARK_OPTIONS='--jars postgresql-42.1.4.jar --conf spark.driver.extraClassPath=postgresql-42.1.4.jar' \
 -p APP_ARGS=--servers='172.17.0.3'
 
 6) Create a route for the app and then go to the link.
