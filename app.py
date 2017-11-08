@@ -30,7 +30,7 @@ class MyClass:
         cur.execute(tb_exists)
         execute = cur.fetchone()[0]
         if not execute:
-            # mak)e table
+            # make table
             cur.execute(
                 'create table wine_reviews(country VARCHAR, designation VARCHAR, points INT, price VARCHAR, province VARCHAR, region_1 VARCHAR, region_2 VARCHAR, variety VARCHAR, winery VARCHAR);')
             conn.commit()
@@ -77,12 +77,9 @@ def index():
     newpath = r'/opt/app-root/src/templates'
     if not os.path.exists(newpath):
         os.makedirs(newpath)
-    #os.chmod('/opt/app-root/src/map.html', 077)
     # move the file to the templates dir
-    #os.rename('/opt/app-root/src/map.html', '/opt/app-root/src/templates/map.html')
     os.system('mv /opt/app-root/src/map.html /opt/app-root/src/templates/')
-    #os.chmod('/opt/app-root/src/templates/map.html', 077)
-
+    #os.chmod(/opt/app-root/src/templates/map.html', 077)
     resp = render_template("map.html", title='Maps')
     return resp
 
